@@ -1,0 +1,161 @@
+html, body{
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+
+#background {
+	background-color: #000;
+    background-image: url(../images/desert.png); /*../ means go back 1 dir*/
+    background-position: center;
+    background-size: cover; /*cover whole page */
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+#loginContainer * {
+	color: #fff;
+	font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+	font-weight: normal;
+	line-height: 1em;
+	box-sizing: border-box;
+}
+
+#loginContainer {
+	width: 80%;
+	margin: 0 auto;
+	position: relative;
+	max-width: 1024px;
+}
+/*change PLACEHOLDERS COLOR, stackoverflow*/
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:rgb(255,255,161);
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:rgb(255,255,161);
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:rgb(255,255,161);
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:rgb(255,255,161);
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:rgb(255,255,161);
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:rgb(255,255,161);
+}
+
+
+/*all the input fields */
+#inputContainer {
+	width:400px;
+	padding:40px;
+	margin-top: 27px;
+	float:left;
+	border-right:1px solid #ec7676
+}
+
+#inputContainer label{
+	color:#e4e4e4;
+	margin-top: 10px;
+	font-size: 14px;
+	display: block;
+}
+
+#inputContainer h2 {
+	text-align: center;
+}
+
+#inputContainer input[type="text"],
+#inputContainer input[type="password"],
+#inputContainer input[type="email"]{
+	display:block; /* just means got spacing between <p fields, unlike display: inline */
+	background-color: transparent;
+	border:0;
+	border-bottom:1px solid #fff;
+	line-height:27px;
+	height: 27px;
+	width: 100%;
+}
+
+/*all buttons */
+#inputContainer button {
+	background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 250px;
+    display: block;
+    letter-spacing: 1px;
+    font-size: 15px;
+    margin: 30px auto;
+    height: 41px;
+    width: 100%;
+}
+
+/*create the pointy cursor */
+#inputContainer button:hover {
+	cursor:pointer;
+}
+
+/*Hide login/register menu, . is for classes */
+.hasAccountText span{
+	font-weight:bold;
+	font-size:12px;
+	cursor: pointer;
+}
+
+.hasAccountText {
+	text-align: center;
+}
+
+/*hide both via css, and let js show both */
+#registerForm {
+	display:none;
+}
+
+#homepageText {
+	display: table-cell;
+	padding: 50px;
+}
+
+#homepageText h1{
+	color:#F5B7B1;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+#homepageText h2{
+	color:#fff;
+	font-size: 1.5em;
+	margin: 36px 0;
+}
+
+#homepageText ul{
+	padding: 0;
+	margin:12px;
+}
+
+#homepageText li{
+	color: #FADBD8;
+	line-height: 25px;
+	list-style-type: none;
+	list-style-image: url(../images/icons/spiral.png);
+}
+
+#homepageText h6{
+	text-align: right;
+	padding: 10px;
+	color: #FCF3CF;
+}
+
+#loginContainer .errorMessage { /*login container or input container must be stated, state parent, otherwise div loginContainer overwrites the color*/
+	color: #f84949;
+	font-size: 12px;
+	display: block;
+}

@@ -1,0 +1,451 @@
+html{
+	padding: 0;
+	margin: 0;
+	height:100%;
+}
+body {
+	padding: 0;
+	margin:0;
+	min-height: 100%;
+}
+/*THIS PREVENTS WHITE BAR1) Using height: 100% on both, prevents body from expanding with its contents once they start to grow beyond the viewport height. Technically this doesn't prevent the content from scrolling, but it does cause body to leave a gap beneath the fold, which is usually undesirable.
+
+2) using min-height: 100% on both, doesn't cause body to expand to the full height of html because min-height with a percentage doesn't work on body unless html has an explicit height.
+3) instead we separate, height 100% html, min height 100% body, so that html is the viewport then applied min to the body for scrolling dynamically.*/
+
+* {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #fff;
+}
+
+body {
+	background-color: #201820;
+    min-width: 720px;
+    font-size: 14px;
+}
+
+/*-- GENERAL MIDDLE PORTION --*/
+
+/*Set whole Playing Bar container to bottom ✓*/
+#nowPlayingBarContainer {
+	width: 100%;
+    min-width: 760px;
+    background-color: #282828;
+    bottom: 0;
+    position: fixed;
+}
+
+/*Add a padded box within the container ✓*/
+#nowPlayingBar {
+	height: 90px;
+	padding: 16px;
+	display: flex;
+	box-sizing: border-box; /*means ur padding is within height, without this padding is on top of height*/
+	
+
+}
+/*30% left right ✓*/
+#nowPlayingRight,
+#nowPlayingLeft {
+	width: 30%;
+	min-width: 120px;
+}
+
+
+
+/*40% middle ✓*/
+#nowPlayingMiddle {
+	width: 40%;
+	max-width: 700px;
+	display: flex;
+	flex-direction: column; /*col, so that u can have the buttons on top and playing bar below*/
+	align-items: center;
+}
+
+/*this class is present in both middle and left right ✓*/
+#nowPlayingBar .content {
+	width: 100%; /*so the duration bar fills the whole nowPlayingBar*/
+	height: 57px; /*makes album art a square, this doesnt affect playingBar cos thats at most 12px*/
+
+}
+
+/*--BUTTONS--*/
+
+/*buttons for the player control*/
+.playerControls .buttons {
+	margin: 0 auto; /*nothing topbottom, auto centres left right*/
+	display: table; /*allows multiple divs/elements within the same line to be aligned*/
+}
+
+/*class for all buttons*/
+.controlButton {
+	background-color: transparent;
+	border: none;
+	vertical-align: middle;
+}
+
+.controlButton img {
+	width: 20px;
+	height: 20px;
+}
+
+/*making the play button slightly bigger*/
+/*HERE WE CHAIN THE CLASSES WITHOUT A SPACE!=>select element with multiple classes*/
+.controlButton.play img,
+.controlButton.pause img {
+	width: 32px;
+	height: 32px;
+}
+
+.controlButton:hover {
+	cursor: pointer;
+}
+
+
+/*--PLAYING DURATION BAR--*/
+/*playback bar contains both time and progressBar*/
+.playbackBar {
+	display: flex; /*prevents overflow of elements for progressbar and time*/
+}
+
+/* the 0.00s */
+.progressTime {
+	color: #a0a0a0;
+	font-size: 11px;
+	min-width: 40px;
+	text-align: center;
+
+}
+
+/* containerish */
+.progressBar {
+	width: 100%;
+	height: 12px;
+	display: inline-flex; /*display: inline-flex makes the flex container display inline vs display: flex which is block-flex. */
+	cursor: pointer; /* to shift the bar*/
+}
+
+/*background bar and the white bar*/
+.progressBarBG {
+	background-color: #404040;
+	height: 4px;
+	width: 100%;
+	border-radius: 2px;
+}
+
+.progress {
+	background-color: #a0a0a0;
+	height: 4px;
+	width: 0; /*as width increases, progress bar also increases*/
+	border-radius: 2px;
+
+}
+
+/*shift container for progress up*/
+.playbackBar .progressBar {
+	margin-top: 3px;
+}
+/*----general middle section end----*/
+
+
+/*-- GENERAL LEFT SECTION --*/
+
+#nowPlayingLeft .albumArt {
+	margin-right: 15px;
+	height: 100%; /*57px height is defined under .content class above */
+	max-width:57px;
+	float: left; /*makes sures the text wont be cut off*/
+	background-size: cover; /*incase the img is a rectangle then enlarge it to fill the square*/
+
+}
+
+#nowPlayingLeft .trackInfo {
+	display: flex; /*allows multiple divs to be aligned according to the longest one*/
+	flex-direction: column;
+}
+
+/*Song Name*/
+#nowPlayingLeft .trackName {
+	margin: 8px 0 3px; /*top 8, leftright 0,bottom3*/
+	width: 100%;
+	display: inline-block; /*block is vertical, inline is on line of text. inline block just means blocks that are inside the text, horizontal of block. since width is 100%, this inline-block is pretty much the same as block though*/
+	
+}
+
+/*CAN DOUBLE CHECK THIS*/
+/*Artist Name*/
+#nowPlayingLeft .artistName span{ /*must apply to the span within the class artistName!*/
+	font-size: 13px;
+	color: #a0a0a0;
+
+}
+
+
+/*-- GENERAL RIGHT SECTION --*/
+/*container must be larger than progressbar!*/
+.volumeBar {
+	display: flex;
+	flex-direction: row;
+	width: 170px;
+	position: absolute; /* means container is adjusted according to the closest positioned ancestor*/
+	right: 0;
+}
+
+.volumeBar .progressBar {
+	width: 120px; /*same as the middle one, we juz changing the container width*/
+	margin-top: 11px;
+	margin-left: 2px;
+}
+
+.volume img {
+	margin-top: 1px;
+}
+
+/*shift volume bar downwards*/
+#nowPlayingRight {
+	position: relative; /*relative to the viewport or container if it is in one, position:absolute is instead adjusted to the closest ancestor */
+	margin-top: 16px;
+}
+
+
+/* --STRUCTURING OUR WEBSITE SECTIONS-- */
+
+#topContainer {
+	min-height: 100%;
+	width: 100%;
+}
+
+/*--NAVIGATION BAR--*/
+#navBarContainer {
+	background-color: #000;
+	width: 220px;
+	height: 100vh;/*VH is the view height of the website*/
+	top: 0;
+	left: 0;
+	position: fixed; /*means even if you scroll it still stays there */
+}
+
+.navBar {
+	padding: 25px; /*padding to shift our logo*/
+	display: flex;
+	flex-direction: column; 
+	-ms-flex-direciton: column; /*for IE which is dead lol*/
+}
+
+.logo{
+	margin-bottom: 10px;
+}
+
+.logo img {
+	width: 32px;
+}
+
+/*Adds the lines above and below our search since got 2 groups*/
+.navBar .group { 
+	border-top: 1px solid #a0a0a0;
+	padding: 10px 0;
+
+}
+
+/*changes fonts*/
+.navItem {
+	padding: 10px;
+	font-size: 14px;
+	font-weight: 700;
+	display: block;
+	letter-spacing: 1px;
+	position: relative; /*position is adjusted to their <div class="group">*/
+}
+
+/*the text labels*/
+.navItemLink{
+	color: #a0a0a0;
+	text-decoration:none; /*removes the underline frm the anchor*/
+}
+
+.navItemLink:hover{
+	color: #F5B7B1;
+}
+
+/*search icon*/
+.navItemLink .icon {
+	top: 7px;
+	right: 0;
+	width: 19px;
+	position: absolute; /*adjusted to closest positioned ancestor, aka 7px below <div class="navItem">*/
+
+}
+
+/*    MAIN VIEW CONTAINER     */
+#mainViewContainer {
+	margin-left: 220px; /*the navBar width*/
+	padding-bottom: 90px; /*padding is between the border and content, margin is from below the border*/
+	width: calc(100%-220px);
+}
+
+#mainContent {
+	padding: 0, 20px;
+	
+}
+
+.bigText {
+	padding: 20px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.gridViewItem {
+	display: inline-block;
+	margin-right: 20px;
+	width: 29%;
+	max-width: 220px;
+	min-width: 110px;
+	padding-left: 20px;
+	margin-bottom: 20px;
+
+}
+
+.gridViewItem img{
+	width: 100%; /*100% of grid view item, 29% */
+
+}
+
+.gridViewInfo {
+	text-align: center;
+	padding: 10px 0;
+	overflow: hidden; /*all the overflow parts are hidden, necessary for text-overflow to work */
+	text-overflow: ellipsis; /* adds ... to text */
+	white-space: nowrap; /*ensures that overflow parts stay in line*/
+	font-weight: 500;
+	font-variant: small-caps;
+	letter-spacing: 1px;
+}
+
+.gridViewItem a {
+	text-decoration: none;
+}
+
+.entityInfo {
+	width: 100%;
+	padding: 40px 0 10px 0;
+	display: inline-block;
+}
+
+.entityInfo .leftSection {
+	min-width: 250px;
+	float: left;
+	width: 20%;
+}
+.entityInfo .leftSection img {
+	width: 100%;
+	max-width: 250px;
+	margin-left: 40px;
+}
+
+.entityInfo .rightSection {
+	width: 80%;
+	float: left;
+	padding: 10px 0 10px 50px;
+	box-sizing: border-box;
+}
+
+.entityInfo .rightSection h2 {
+	margin-top: 0;
+}
+
+.entityInfo span {
+	font-weight: 200;
+	color: #939393;
+}
+
+.entityInfo .artistee {
+	font-weight: bold;
+}
+
+.trackRow {
+	list-style-type: none;
+	padding-bottom: 15px;
+}
+
+.trackRow .track {
+	height: 42px;
+	padding: 15px 10px;
+}
+
+
+.trackRow .track:hover {
+	background-color: #282828;
+}
+
+.trackRow .track:active {
+	background-color: #595757;
+}
+
+.trackRow .tracks {
+	margin-bottom: 5px;
+	width: 8%;
+	float: left;
+}
+
+.trackRow .tracks img {
+	width: 16px;
+	vertical-align: middle;
+}
+
+.trackRow .play {
+	visibility: hidden;
+	position: absolute;
+	cursor: pointer;
+}
+
+.trackRow:hover .play {
+	visibility: visible;
+}
+
+.trackRow .tracks .trackItem{
+	visibility: visible;
+}
+
+.trackRow:hover .tracks .trackItem{
+	visibility: hidden;
+}
+
+.trackRow .tracks2 {
+	width: 80%;
+	clear: both;
+	float: left;
+}
+
+.trackRow .tracks2 span {
+	display: block;
+}
+
+
+.trackRow .tracks2 .trackArtist{
+	font-weight: lighter;
+	color: #939393
+}
+
+.trackRow .tracks3 {
+	display: inline;
+	float: left;
+	width: 9%;
+	text-align: right;
+}
+
+.trackRow .tracks4 {
+	margin-left: 22px;
+	display: inline;
+	float: left;
+	width: 6%;
+}
+
+.trackRow .tracks4 img {
+	width: 15px;
+	visibility: hidden;
+
+}
+
+.trackRow:hover .tracks4 img {
+	visibility: visible;
+}
